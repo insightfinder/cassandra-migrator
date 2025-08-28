@@ -1,0 +1,14 @@
+dsbulk:
+  url: https://github.com/datastax/dsbulk/releases/download/1.11.0/dsbulk-1.11.0.jar
+
+cassandra:
+  host: localhost
+  port: 9042
+  keyspace: insightfinderspace
+  username: cassandra
+  password: cassandra
+  tables:
+    - customers
+
+data:
+  path: ./data
