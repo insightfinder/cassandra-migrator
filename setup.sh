@@ -30,7 +30,7 @@ if ! command -v dsbulk &> /dev/null; then
         echo "dsbulk could not be found. Downloading."
         mkdir -p ./tools/dsbulk
         DSBULK_URL=$($YQ_CMD -r '.dsbulk.url' ./config.yaml)
-        curl -L $DSBULK_URL -o ./tools/dsbulk/dsbulk.jar
+        curl -L "$DSBULK_URL" -o ./tools/dsbulk/dsbulk.jar
         chmod +x ./tools/dsbulk/dsbulk.jar
         echo "dsbulk has been installed successfully!"
     fi
@@ -50,7 +50,7 @@ export CASSANDRA_TABLES_LENGTH=$($YQ_CMD -r '.cassandra.tables | length' ./confi
 
 # Get data path
 export DATA_PATH=$($YQ_CMD -r '.data.path' ./config.yaml)
-if [ -z "$DATA_PATH" ]; then
-    mkdir -p $DATA_PATH
+if [ -n "$DATA_PATH" ] && [ ! -d "$DATA_PATH" ]; then
+    mkdir -p "$DATA_PATH"
     echo "Data path created at: $DATA_PATH"
 fi
