@@ -8,5 +8,5 @@ for ((i=0; i<$CASSANDRA_TABLES_LENGTH; i++)); do
     TABLE_FOLDER="$DATA_PATH/$TABLE_NAME"
     mkdir -p "$TABLE_FOLDER"
 
-    eval "$DSBULK_CMD unload -h $CASSANDRA_HOST -port $CASSANDRA_PORT -k $CASSANDRA_KEYSPACE -t $TABLE_NAME -url $TABLE_FOLDER -header true -maxConcurrentQueries 10 -cl ONE --log.checkpoint.enabled false --connector.csv.maxCharsPerColumn -1"
+    eval "$DSBULK_CMD unload -h $CASSANDRA_HOST -port $CASSANDRA_PORT -u ${CASSANDRA_USERNAME} -p ${CASSANDRA_PASSWORD} -k $CASSANDRA_KEYSPACE -t $TABLE_NAME -url $TABLE_FOLDER -header true -maxConcurrentQueries 10 -cl ONE --log.checkpoint.enabled false --connector.csv.maxCharsPerColumn -1"
 done
